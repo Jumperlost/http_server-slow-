@@ -3,7 +3,9 @@ const { faker } = require("@faker-js/faker");
 
 const PORT = 3000;
 
-const server = http.createServer((req, res) => {
+const server = http.createServer();
+
+server.on("request", (req, res) => {
   console.log("Server request");
   console.log(req.url, req.method);
 
@@ -27,6 +29,7 @@ const server = http.createServer((req, res) => {
     }
     res.writeHead(200, { "Content-Type": "application/json" });
     res.write(JSON.stringify({ users: json }));
+    res.end();
   }, delay);
 });
 
